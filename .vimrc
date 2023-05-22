@@ -91,6 +91,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'sainnhe/everforest'
   Plug 'sheerun/vim-polyglot'
   Plug 'ervandew/supertab'
+  Plug 'arnaud-lb/vim-php-namespace'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   call plug#end()
 " }}}
 
@@ -99,7 +102,8 @@ call plug#begin('~/.vim/plugged')
 " MAPPINGS --------------------------------------------------------------- {{{
 
 " Mappings code goes here.
-map <C-7> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+let mapleader = ","
+nnoremap <silent> <Space><Space> :Files<CR>
 " }}}
 
 
@@ -116,12 +120,12 @@ augroup END
 autocmd VimEnter * NERDTree | wincmd p
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
-  
+
 " Full config: when writing or reading a buffer, and on changes in insert and
 " normal mode (after 500ms; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
-     
-     " For dark version.   
+
+     " For dark version.
         set background=dark
  " Set contrast.
         " This configuration option should be placed before `colorscheme everforest`.
@@ -135,10 +139,18 @@ colorscheme everforest
 "needed for ctags. It will generate the tags each time you save a PHP file.
 au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
+"Used for automatic import statements
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
+
 " More Vimscripts code goes here.
 
 " }}}
-    
+
 
 " STATUS LINE ------------------------------------------------------------ {{{
 
@@ -151,13 +163,10 @@ set statusline+=\ %F\ %M\ %Y\ %R
 
 " Use a divider to separate the left side from the right side.
 set statusline+=%=
-     
-" Status line right side.  
+
+" Status line right side.
 set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
-        
+
 " Show the status on the second to last line.
 set laststatus=2
 " }}}
-
-
-
