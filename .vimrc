@@ -94,6 +94,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'arnaud-lb/vim-php-namespace'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'mattn/emmet-vim'
   call plug#end()
 " }}}
 
