@@ -94,7 +94,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'arnaud-lb/vim-php-namespace'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'vim-vdebug/vdebug'
   Plug 'mattn/emmet-vim'
+  Plug 'craigemery/vim-autotag'
   call plug#end()
 " }}}
 
@@ -105,6 +107,13 @@ call plug#begin('~/.vim/plugged')
 " Mappings code goes here.
 let mapleader = ","
 nnoremap <silent> <Space><Space> :Files<CR>
+
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 " }}}
 
 
@@ -171,3 +180,4 @@ set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
 " Show the status on the second to last line.
 set laststatus=2
 " }}}
+-------
