@@ -130,12 +130,12 @@ call plug#begin('~/.vim/plugged')
 let mapleader = ","
 nnoremap <silent><Space><Space> :Files<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> :Sterm <CR>
+nnoremap <F3> :term <CR>
 
 
 inoremap <silent><Space><Space><Esc> :Files<CR>
 inoremap <F2> <Esc>:NERDTreeToggle<CR>
-inoremap <F3> <Esc>:Sterm<CR>
+inoremap <F3> <Esc>:term<CR>
 
 function! IPhpInsertUse()
     call PhpInsertUse()
@@ -190,7 +190,7 @@ call neomake#configure#automake('nrwi', 500)
 au BufWritePost *.php silent! !eval '[ -f ".git/hooks/ctags" ] && .git/hooks/ctags' &
 
 " I want my terminal always opened in the bottom window full width
-command! -nargs=* -complete=shellcmd Sterm belowright 14split | term <args>
+"command! -nargs=* -complete=shellcmd Sterm belowright 14split | term <args>
 
 " More Vimscripts code goes here.
 
@@ -198,22 +198,38 @@ command! -nargs=* -complete=shellcmd Sterm belowright 14split | term <args>
 
 
 " Enable unicode icons and symbols for file nodes using vim-devicons
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = '💃'
 " enable pattern matching glyphs on folder/directory (enabled by default with 1)
 let g:DevIconsEnableFolderPatternMatching = 1
 " enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
 
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {} " needed
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['*\.js$'] = 'nf-dev-javascript_badge'
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.php$'] = '󰌟'
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.graphql$'] = '󰡷'
 let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.json$'] = '󰘦'
 
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.js$'] = '󰌞'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.ts$'] = '󰛦'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.html$'] = '󰌝'
 
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.css$'] = '🎨'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.scss$'] = '🎨'
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {} 
-let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['Dockerfile'] = '󰡨'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['Dockerfile'] = '🐳'
 
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*\.md$'] = '📖'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['node_modules'] = '📁'
+
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['database'] = '🗄️'
+
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['factories'] = '🏭'
+
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['seeders'] = '🌱'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['tests'] = '🎓'
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['bootstrap'] = '🥾'
+
+let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['lang'] = '📢'
 " Enable unicode icons and symbols for file and folder nodes using vim-devicons
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
